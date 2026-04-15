@@ -5,5 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>STARTER</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Zhi Todo-List</h1>
+    </header>
+    <div>
+      <button class="add-prj">Add Project</button>
+    </div>
+
+    <div id="content"></div>
+
+    <dialog id="prj-dialog">
+      <button class="prj-close">close</button>
+      <form method="dialog" id="prj-form">
+        <label for="name">Project Name</label>
+        <input type="text" name="name" id="name" />
+        <div>
+          <button type="submit">Add Project</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="todo-dialog">
+      <button class="dialog-close">Close</button>
+      <form id="todo-form" method="dialog" data-active-project="">
+        <label for="title">Title</label>
+        <input type="text" id="todo-title" name="title" required />
+
+        <label for="todo-desc">Description</label>
+        <textarea
+          name="Description"
+          id="todo-desc"
+          placeholder="add more details about the task"
+          rows="2"
+        ></textarea>
+
+        <label for="priority-choice">Priority</label>
+        <select name="Priority" id="priority-choice">
+          <option value="blue">Blue(calm)</option>
+          <option value="red">Red(urgent)</option>
+          <option value="green">Green(growth)</option>
+        </select>
+
+        <div>
+          <button type="submit" class="submit-btn">Add Task</button>
+        </div>
+      </form>
+    </dialog>
+    <div>
+      <dialog id="show-todo">
+        <button class="close-todo">Close Todos</button>
+      </dialog>
+    </div>
+  </body>
 </html>
