@@ -24,14 +24,27 @@ export class TodoUI {
     console.log(this.dialog);
     this.dialog.showModal();
   }
+  helpCreateElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.classList.add(className);
+    if (text) element.textContent = text;
+    return element;
+  }
   createTodo(todo) {
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
-    todoCard.innerHTML = `<h5>${todo.title}</h5>
-    <p>${todo.description}</p>
-    <button class="del-todo" data-todo-id="${todo.id}">Delete</button>
-    
-`;
+    const title = this.helpCreateElement("h5", "todo-title", todo.title);
+    const date = this.helpCreateElement("span");
+    const description = this.helpCreateElement(
+      "p",
+      "todo-desc",
+      todo.description,
+    );
+    const delBtn = this.helpCreateElement("button", "del-todo", "Delete");
+    delBtn.dataset.id = todo.id;
+
+    todoCard.append(title, description, delBtn);
+
     return todoCard;
   }
 }
