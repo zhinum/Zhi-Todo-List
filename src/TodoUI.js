@@ -1,4 +1,5 @@
 import { Project } from "./projectMain.js";
+import { format } from "date-fns";
 
 export class TodoUI {
   constructor() {
@@ -33,8 +34,10 @@ export class TodoUI {
   createTodo(todo) {
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
+
+    const currentDate = format(todo.createdAt, `MMM do, yyyy`);
     const title = this.helpCreateElement("h5", "todo-title", todo.title);
-    const date = this.helpCreateElement("span");
+    const date = this.helpCreateElement("span", "todo-date", currentDate);
     const description = this.helpCreateElement(
       "p",
       "todo-desc",
@@ -43,7 +46,7 @@ export class TodoUI {
     const delBtn = this.helpCreateElement("button", "del-todo", "Delete");
     delBtn.dataset.id = todo.id;
 
-    todoCard.append(title, description, delBtn);
+    todoCard.append(title, date, description, delBtn);
 
     return todoCard;
   }
