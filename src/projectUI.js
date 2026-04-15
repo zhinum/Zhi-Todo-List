@@ -17,21 +17,47 @@ export class projectUI {
       this.cardContainer.appendChild(card);
     });
   }
+  helpCreateElements(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.classList.add(className);
+    if (text) element.textContent = text;
+    return element;
+  }
   createCard(project) {
     const card = document.createElement("div");
     card.classList.add("project-card");
     card.dataset.id = project.id;
-    card.innerHTML = `<h3>${project.name}</h3>
-    
-    <span>${project.createdAt.toLocaleDateString()}</span>
-    
-    <div class="card-actions">
-      <button class="del-project">Delete Project</button>
-      <button class="add-button">Add Todo</button>
-      <button class="show-button">Show Todo</button>
-    </div>
-    
-        `;
+
+    const prjTitle = this.helpCreateElements("h3", "prj-title", project.title);
+
+    const prjDate = this.helpCreateElements(
+      "span",
+      "prj-date",
+      project.createdAt.toLocaleDateString(),
+    );
+
+    const btnDiv = this.helpCreateElements("div", "card-actions");
+
+    const delProjectBtn = this.helpCreateElements(
+      "button",
+      "del-project",
+      "Delete Project",
+    );
+
+    const addProjectBtn = this.helpCreateElements(
+      "button",
+      "add-button",
+      "Add Todo",
+    );
+
+    const showProjectBtn = this.helpCreateElements(
+      "button",
+      "show-button",
+      "Show Todo",
+    );
+
+    btnDiv.append(delProjectBtn, addProjectBtn, showProjectBtn);
+    card.append(prjTitle, prjDate, btnDiv);
     return card;
   }
 }
