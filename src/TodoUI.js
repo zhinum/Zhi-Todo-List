@@ -5,6 +5,7 @@ export class TodoUI {
   constructor() {
     this.dialog = document.querySelector("#show-todo");
     this.todoContainer = document.createElement("div");
+    this.todoContainer.classList.add("todo-container");
     this.dialog.appendChild(this.todoContainer);
   }
   renderTodo(projectId) {
@@ -31,6 +32,7 @@ export class TodoUI {
     if (text) element.textContent = text;
     return element;
   }
+
   createTodo(todo) {
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
@@ -43,10 +45,16 @@ export class TodoUI {
       "todo-desc",
       todo.description,
     );
+    const priority = this.helpCreateElement(
+      "div",
+      "todo-priority",
+      todo.priority,
+    );
+    console.log(todo.priority);
     const delBtn = this.helpCreateElement("button", "del-todo", "Delete");
     delBtn.dataset.id = todo.id;
 
-    todoCard.append(title, date, description, delBtn);
+    todoCard.append(title, date, description, priority, delBtn);
 
     return todoCard;
   }
