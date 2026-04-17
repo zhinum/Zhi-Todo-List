@@ -78,7 +78,8 @@ export class TodoLogic {
     const todoDialog = document.querySelector("#show-todo");
     todoDialog.addEventListener("click", (e) => {
       if (e.target.classList.contains("del-todo")) {
-        const todoId = e.target.dataset.todoId;
+        const todoId = e.target.closest(".del-todo").dataset.id;
+        console.log(todoId);
         const projectId = todoDialog.dataset.activeProject;
         this.deleteTodo(projectId, todoId);
       }
@@ -92,9 +93,15 @@ export class TodoLogic {
     const project = Project.ProjectStore.find(
       (project) => project.id === projectId,
     );
-    console.log(project);
+
     if (project) {
-      project.todos = project.todos.filter((todo) => todo.id !== todoId);
+      console.log("Searching for Todo ID:", todoId);
+
+      project.todos = project.todos.filter((todo) => {
+        const isMatch = todo.id === todoId;
+        return !isMatch;
+      });
+
       this.ui.renderTodo(projectId);
     }
   }
