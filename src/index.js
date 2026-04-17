@@ -1,5 +1,4 @@
-console.log("index loaded");
-
+import "./todo.css";
 import { projectLogic } from "./projectLogic.js";
 import { projectUI } from "./projectUI.js";
 import { Project } from "./projectMain.js";
