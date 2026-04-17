@@ -28,7 +28,7 @@ export class projectUI {
     card.classList.add("project-card");
     card.dataset.id = project.id;
 
-    const prjTitle = this.helpCreateElements("h3", "prj-title", project.title);
+    const prjTitle = this.helpCreateElements("h3", "prj-title", project.name);
 
     const prjDate = this.helpCreateElements(
       "span",
