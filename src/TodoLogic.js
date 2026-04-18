@@ -50,7 +50,6 @@ export class TodoLogic {
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
       this.submitTodo();
-      console.log("this todo is submitted");
     });
   }
   submitTodo() {
@@ -60,14 +59,14 @@ export class TodoLogic {
     const newTodo = new Todo({
       title: data.get(`title`),
       priority: data.get(`Priority`),
-      desc: data.get(`Description`),
+      description: data.get(`Description`),
     });
     const projects = Project.ProjectStore.find((p) => p.id === targetProjectId);
 
     if (projects) {
       projects.todos.push(newTodo);
     }
-
+    Project.saveToLocalstorage();
     this.form.reset();
     this.dialog.close();
   }
@@ -101,7 +100,7 @@ export class TodoLogic {
         const isMatch = todo.id === todoId;
         return !isMatch;
       });
-
+      Project.saveToLocalstorage();
       this.ui.renderTodo(projectId);
     }
   }
@@ -110,6 +109,7 @@ export class TodoLogic {
     if (index !== -1) {
       Project.ProjectStore.splice(index, 1);
     }
+    Project.saveToLocalstorage();
     this.projUi.renderProjects();
   }
 }
