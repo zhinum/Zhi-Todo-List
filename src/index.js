@@ -7,12 +7,6 @@ import { TodoUI } from "./TodoUI.js";
 import { Todo } from "./TodoMain.js";
 
 const content = document.querySelector("#content");
-const projectsDisplay = new projectUI(content, Project.ProjectStore);
-const projectHandler = new projectLogic(projectsDisplay, content);
-projectsDisplay.renderProjects();
-
-const todoDisplay = new TodoUI();
-const todoHandler = new TodoLogic(todoDisplay, content, projectsDisplay);
 
 function showDemoData() {
   const mission = new Project({ name: " Mission Impossible" });
@@ -65,7 +59,18 @@ function showDemoData() {
   );
 
   Project.ProjectStore.push(mission, gowProject, lodr);
-  console.log(Project.ProjectStore);
+  Project.saveToLocalstorage();
 }
-showDemoData();
+Project.loadFromLocalStorage();
+
+if (Project.ProjectStore.length === 0) {
+  showDemoData();
+}
+
+const projectsDisplay = new projectUI(content, Project.ProjectStore);
+const projectHandler = new projectLogic(projectsDisplay, content);
+
+const todoDisplay = new TodoUI();
+const todoHandler = new TodoLogic(todoDisplay, content, projectsDisplay);
+
 projectsDisplay.renderProjects();
