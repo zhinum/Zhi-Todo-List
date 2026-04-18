@@ -45,6 +45,7 @@ export class projectLogic {
     store.push(newPrj);
 
     console.log(Project.ProjectStore.length);
+    Project.saveToLocalstorage();
     this.ui.renderProjects();
     this.prjForm.reset();
     this.prjDialog.close();
